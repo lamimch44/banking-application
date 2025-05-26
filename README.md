@@ -92,4 +92,43 @@ npm install
 ```bash
 npm run dev
 ```
+### 🌐 Open in Browser
+
+After starting the development server, visit:
+
+```http://localhost:3000```
+
+---
+
+## 📌 Future Improvements
+
+- 📧 Email verification and password reset system
+- 📊 Dashboard analytics for users and agents
+- 🛠 Admin panel for system monitoring and user management
+- 🔐 Pin verification system in every transaction
+
+---
+
+## 🛡 License
+
+This project is open-source and free to use under the MIT License.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-name`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature-name`)
+5. Open a Pull Request
+
+---
+
+## 🙌 Acknowledgement
+
+Frontend designed and styled with the help of [ChatGPT](https://openai.com/chatgpt), developed as part of a full-stack learning journey.
+
 
