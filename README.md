@@ -50,24 +50,35 @@ MyBank is a fully responsive, role-based banking application that supports gener
 
 ## 📁 Folder Structure (Frontend)
 ```
-project/
+root/
 │
-├── public/
-│ └── css/
-│ └── style.css
+├── bank-agent/                 # Agent
+│   
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── public/
+│   ├── routers/
+│   ├── utilities/
+│   ├── views/
+│   ├── app.js
+│   ├── .env
+│   ├── package.json
+│   └── package-lock.json  
 │
-├── views/
-│ ├── index.ejs # Login page
-│ ├── signup.ejs # Signup page
-│ ├── dashboard.ejs # User dashboard
-│ ├── transactions.ejs # Transaction history with modal
-│ ├── send-money.ejs # Send money form
-│ ├── cashout.ejs # Cash out form
-│ ├── add-money.ejs # Agent add money
-│ ├── request.ejs # Agent send money request
-│ ├── request-list.ejs # User view requests
-│ ├── agent-dashboard.ejs # Agent dashboard
-│ └── success.ejs # Transaction success page
+├── user/                 # User
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── public/
+│   ├── routers/
+│   ├── utilities/
+│   ├── views/
+│   ├── app.js
+│   ├── .env
+│   ├── package.json
+│   └── package-lock.json  
+
 ```
 
 ---
@@ -75,7 +86,10 @@ project/
 ## 🚀 Getting Started
 
 ### 🔧 Install Dependencies
-```bash```
+```bash
 npm install
-```bash```
+```
+```bash
+npm run dev
+```
 
