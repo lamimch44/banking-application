@@ -49,7 +49,7 @@ MyBank is a fully responsive, role-based banking application that supports gener
 ---
 
 ## 📁 Folder Structure (Frontend)
-
+```
 project/
 │
 ├── public/
@@ -68,7 +68,7 @@ project/
 │ ├── request-list.ejs # User view requests
 │ ├── agent-dashboard.ejs # Agent dashboard
 │ └── success.ejs # Transaction success page
-
+```
 
 ---
 
