@@ -14,13 +14,13 @@ MyBank is a fully responsive, role-based banking application that supports gener
 - 📜 **Transaction History** with:
   - Scrollable transaction list
   - Modal pop-up with transaction details (ID, sender, receiver, date, amount)
-- 📨 **Send Money Request** to users
+- 📨 **Send Money Request** to agents
 
 ### 🧑‍💼 Agent Functionality
 - 🔐 Agent login with a separate dashboard
 - ➕ **Add Money** to a user's account
 - 📥 **Money Request Handling**:
-  - View pending requests from agents
+  - View pending requests from users
   - Approve or reject requests
 - 📄 View request status (pending/approved/rejected)
 
@@ -41,10 +41,10 @@ MyBank is a fully responsive, role-based banking application that supports gener
 
 ## 🔐 User Roles
 
-- `User` — Can send money, view transactions, cash out, and respond to agent requests.
-- `Agent` — Can add money to users and initiate money requests.
+- `User` — Can send money, view transactions, cash out, and initiate money requests.
+- `Agent` — Can add money to users, send money to agent, view transactions and respond to user requests .
 
-> 🛑 **Note:** Same email cannot be used for both agent and user roles to avoid transaction confusion.
+> 🛑 **Note:** Same email cannot be used for both agent and user roles.
 
 ---
 
@@ -90,13 +90,15 @@ root/
 npm install
 ```
 ```bash
-npm run dev
+npm start
 ```
 ### 🌐 Open in Browser
 
 After starting the development server, visit:
 
-```http://localhost:3000```
+```http://localhost:4000```
+And the bank agent
+```http://localhost:5000```
 
 ---
 
