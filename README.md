@@ -1,6 +1,6 @@
 # 💸 MyBank - Full Stack Banking Web App
 
-MyBank is a fully responsive, role-based banking application that supports general users and agents. Users can send and receive money, view transaction history, cash out, and manage requests. Agents can add money to users and send money requests.
+MyBank is a fully responsive, role-based banking application that supports general users and agents. Users can send and receive money, view transaction history, cash out, and send money requests. Agents can add money to users and manage requests.
 
 ---
 
@@ -14,14 +14,14 @@ MyBank is a fully responsive, role-based banking application that supports gener
 - 📜 **Transaction History** with:
   - Scrollable transaction list
   - Modal pop-up with transaction details (ID, sender, receiver, date, amount)
-- 📥 **Money Request Handling**:
-  - View pending requests from agents
-  - Approve or reject requests
+- 📨 **Send Money Request** to users
 
 ### 🧑‍💼 Agent Functionality
 - 🔐 Agent login with a separate dashboard
 - ➕ **Add Money** to a user's account
-- 📨 **Send Money Request** to users
+- 📥 **Money Request Handling**:
+  - View pending requests from agents
+  - Approve or reject requests
 - 📄 View request status (pending/approved/rejected)
 
 ---
