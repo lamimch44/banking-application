@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent - Add Money</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="agent-container">
+    <h2 class="agent-title">Agent - Add Money to User</h2>
+    <form action="/dashboard/add-money" method="POST" class="agent-form">
+      <input type="email" name="email" placeholder="User Email" class="agent-input" value="<%= data.email %>" />
+          <% if(errors.email) {%>
+          <p class="error"><%= errors.email.msg %></p>
+          <% } %>
+      <input type="number" name="amount" placeholder="Amount (৳)" class="agent-input" min="1" />
+        <% if(errors.amount){ %>
+        <p class="error"><%= errors.amount.msg %></p>
+        <% } %>
+      <textarea name="note" placeholder="Optional note..." class="agent-input agent-textarea"></textarea>
+      <button type="submit" class="agent-btn">Add Money</button>
+    </form>
+    <a class="back-link" href="/dashboard">← Back to Agent Dashboard</a>
+  </div>
+</body>
+</html>

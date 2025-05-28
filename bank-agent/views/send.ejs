@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Money - MyBank</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Send Money</h2>
+    <form action="/dashboard/send-money" method="post">
+      <input type="email" placeholder="Recipient Agent Email" name="email" value="<%= data.email %>" />
+      <% if(errors.email) {%>
+      <p class="error"><%= errors.email.msg %></p>
+      <% } %>
+      <input type="number" placeholder="Amount (৳)" name="amount" />
+      <% if(errors.amount) {%>
+      <p class="error"><%= errors.amount.msg %></p>
+      <% } %>
+      <button type="submit">Send</button>
+      <p><a href="/dashboard">Back to Dashboard</a></p>
+    </form>
+  </div>
+</body>
+</html>

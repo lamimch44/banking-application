@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent Dashboard - MyBank</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/toastify.css">
+ <script src="/js/toastify.js"></script>
+</head>
+<body>
+  <div class="agent-dashboard">
+    <div class="agent-header">
+      <h2>Welcome, <%= data.storename %></h2>
+      <button class="logout-btn">Logout</button>
+    </div>
+
+    <div class="balance-box">
+      <h3>Agent Wallet Balance</h3>
+      <p>৳ <%= data.balance.toLocaleString() %> </p>
+    </div>
+
+    <div class="quick-actions">
+      <a href="/dashboard/add-money">Add Money</a>
+      <a href="/dashboard/send-money">Send Money</a>
+      <a href="/dashboard/transactions">Transactions</a>
+      <a href="/dashboard/money-request">Customer Requests</a>
+    </div>
+
+    <div class="recent-activities">
+      <h4>Recent Transactions</h4>
+      <ul class="activity-list">
+        <% if(transacs.length > 0){ %>
+              <%transacs.forEach(transac => {%>
+                <% if(transac.trantype == 'sendmoney'){ %>
+           <% if(transac.sender == loggedInUser.email) { %>
+            <li class="money-out" onclick="showDetails('<%= transac.transactionid %>', '<%= transac.sender %>', '<%= transac.receiver %>', '<%= transac.amount %>', '<%= transac.date.toLocaleDateString() %>', '<%= transac.note %>', 'Send Money')">
+              Sent ৳<%= transac.amount.toLocaleString('en-US') %> to <%= transac.receivername %> - <%= transac.date.toLocaleDateString() %>
+            </li>
+          <% } else { %>
+            <li class="money-in" onclick="showDetails('<%= transac.transactionid %>', '<%= transac.sender %>', '<%= transac.receiver %>', '<%= transac.amount %>', '<%= transac.date.toLocaleDateString() %>', '<%= transac.note %>', 'Send Money')">
+              Received ৳<%= transac.amount.toLocaleString('en-US') %> from <%= transac.sendername %> - <%= transac.date.toLocaleDateString() %>
+            </li>
+          <% } %>
+            <% }else{ %>
+                 <%if(transac.senderid == loggedInUser.id){%>
+                  <% if(transac.trantype == 'cash') {%>
+                    <li class="money-out" onclick="showDetails('<%= transac.transactionid %>', '<%= transac.sender %>', '<%= transac.receiver %>', '<%= transac.amount %>', '<%= transac.date.toLocaleDateString() %>', '<%= transac.note %>', 'Cash In')">Cash In <%= transac.amount%> to <%=transac.receivername%></li>
+                    <% } %>
+                       
+                  <% }else if(transac.receiver == loggedInUser.email){ %>
+                    <li class="money-in" onclick="showDetails('<%= transac.transactionid %>', '<%= transac.receiver %>', '<%= transac.sender %>', '<%= transac.amount %>', '<%= transac.date.toLocaleDateString() %>', '<%= transac.note %>', 'Cash Out')">Cash Out <%= transac.amount%> from <%=transac.sendername%></li>
+                  
+                    <% } %>
+                    <% } %>
+             <% })%>
+          <% }else{ %>
+               <li>No Transaction</li>
+            <% } %>
+      </ul>
+    </div>
+
+          <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h3>Transaction Details</h3>
+      <p><strong>Type:</strong> <span id="txnType"></span></p>
+      <p><strong>ID:</strong> <span id="txnId"></span></p>
+      <p><strong>Agent:</strong> <span id="txnSender"></span></p>
+      <p><strong>User:</strong> <span id="txnReceiver"></span></p>
+      <p><strong>Amount:</strong> <span id="txnAmount"></span> TK</p>
+      <p><strong>Date:</strong> <span id="txnDate"></span></p>
+      <p><strong>Note:</strong> <span id="txnNote"></span></p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    const lbtn = document.querySelector('.logout-btn');
+
+    lbtn.addEventListener('click', (e) => {
+      fetch('/logout', {
+        method: "DELETE"
+      })
+
+      const logoutToast = Toastify({
+        text: "You are logged out...",
+        duration: 1000
+      });
+
+      logoutToast.showToast();
+
+      setTimeout(() => {
+        window.location.replace('/')
+      }, 1000)
+    })
+
+     function showDetails(id, sender, receiver, amount, date, note, type) {
+      document.getElementById('txnId').innerText = id;
+      document.getElementById('txnType').innerText = type;
+      document.getElementById('txnSender').innerText = sender;
+      document.getElementById('txnReceiver').innerText = receiver;
+      document.getElementById('txnAmount').innerText = parseFloat(amount).toLocaleString();
+      document.getElementById('txnDate').innerText = date;
+      if(note == 'null'){
+      document.getElementById('txnNote').innerText = 'No Note';
+      }else{
+      document.getElementById('txnNote').innerText = note;
+      }
+      document.getElementById('modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  </script>
+
+    <a href="/dashboard" class="tranc-btn">Back</a>
+  </script>
+</body>
+</html>

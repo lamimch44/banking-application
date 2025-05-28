@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Success - MyBank</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="success-container">
+    <div class="success-card">
+      <h2 class="success-title">✅ Transaction Successful!</h2>
+      <p class="success-message">Your money has been sent successfully.</p>
+      <div class="transaction-details">
+      <p><strong>Amount:</strong> <%= data.amount.toLocaleString('en-US') %> TK</p>
+        <p><strong>Sender:</strong> <%= data.sender %></p>
+      <p><strong>Receiver:</strong> <%= data.receiver %></p>
+      <p><strong>Transaction ID:</strong> <%= data.transactionid %></p>
+      </div>
+      <a href="/dashboard" class="btn">Return to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

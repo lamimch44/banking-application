@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - MyBank</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/toastify.css" />
+  <script src="js/toastify.js"></script>
+</head>
+<body class="dash-body">
+  <div class="dashboard">
+    <h1>Welcome, <%= loggedInUser.fullname  %></h1>
+    <div class="balance-card">
+      <h2>Account Balance</h2>
+      <p class="balance-amount">৳<%= loggedInUser.balance.toLocaleString('en-US')  %></p>
+    </div>
+    <div class="actions">
+      <a href="/dashboard/sendmoney" class="btn">Send Money</a>
+      <a href="/dashboard/cashout" class="btn">Cash Out</a>
+      <a href="/dashboard/transactions" class="btn">Transaction History</a>
+      <a href="/dashboard/request-money" class="btn">Request Money</a>
+      <button class="btn logout" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="extras">
+      <div class="card info-card">
+        <h3>Recent Tips</h3>
+        <p>💡 Always double-check the recipient before sending money.</p>
+      </div>
+
+      <div class="card info-card">
+        <h3>Support</h3>
+        <p>Need help? <a href="#">Contact Support</a></p>
+      </div>
+
+      <div class="card info-card">
+        <h3>Offers</h3>
+        <p>🎁 Get 5% cashback on your first transaction!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ async function logout(){
+
+       await fetch('/logout', {
+          method: 'DELETE'
+         });
+
+         const logoutToast = Toastify({
+          text: 'You are logged out....',
+          duration: 1000
+         })
+
+         logoutToast.showToast();
+
+          setTimeout(() => {
+            window.location.replace('/')
+          }, 1000) 
+         
+    }
+  </script>
+</body>
+</html>

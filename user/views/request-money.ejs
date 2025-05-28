@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Money - MyBank</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="request-container">
+    <h2 class="request-title">Request Money</h2>
+    <form action="/dashboard/request-money" method="POST" class="request-form">
+      <input type="email" name="email" placeholder="Agent's Email" class="form-input" value="<%=data.email%>" />
+        <% if(errors.email){ %>
+        <p class="error"><%= errors.email.msg %></p>
+        <% } %>
+      <input type="number" name="amount" placeholder="Amount (৳)" class="form-input" />
+             <% if(errors.amount){ %>
+        <p class="error"><%= errors.amount.msg %></p>
+        <% } %>
+      <textarea name="note" placeholder="Write a message (optional)" class="form-input form-textarea"></textarea>
+      <button type="submit" class="request-btn">Send Request</button>
+    </form>
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Requests - MyBank Agent</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/toastify.css" />
+  <script src="/js/toastify.js"></script>
+</head>
+<body>
+  <div class="request-container">
+    <h2 class="request-title">User Money Requests</h2>
+
+    <!-- Request card example -->
+    <% if(requests.length > 0) { %>
+      <% requests.forEach(req => { %>
+        <div class="request-card">
+          <div class="request-info"><strong>User Email:</strong> <%= req.user %></div>
+          <div class="request-info"><strong>Amount:</strong> ৳<%= req.amount.toLocaleString() %></div>
+          <div class="request-info"><strong>Message:</strong> <%= req.note || "No message" %></div>
+          <div class="request-info"><strong>Status:</strong> 
+            <% if(req.status === 'pending') { %>
+              <span class="status-pending">Pending</span>
+            <% } else if(req.status === 'approved') { %>
+              <span style="color:green;font-weight:bold;">Approved</span>
+            <% } else { %>
+              <span style="color:red;font-weight:bold;">Rejected</span>
+            <% } %>
+          </div>
+
+          <% if(req.status === 'pending') { %>
+            <div class="request-actions">
+              <form action="/" id="approve">
+                <input type="hidden" name="requestId" value="<%= req.requestid %>">
+                <input type="hidden" name="user" value="<%= req.user %>">
+                <button class="btn-approve" type="submit">Approve</button>
+              </form>
+              <form method="POST" action="/agent/reject-request" id="reject">
+                <input type="hidden" name="requestId" value="<%= req.requestid %>">
+                <button class="btn-reject" type="submit">Reject</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align:center;">No pending requests.</p>
+    <% } %>
+
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+    <script>
+       const approveform = document.getElementById("approve")
+       const rejectform = document.getElementById("reject")
+
+       approveform.onsubmit = async (e) => {
+        e.preventDefault();
+        try{
+       let formData = new FormData(approveform);
+      const request = await fetch('/dashboard/money-request/approve-request', {
+         method: 'POST',
+          body: formData
+        })
+
+        const response = await request.json();
+            console.log(response)
+
+        let reqApprove;
+        if(response.code == 372){
+         reqApprove = Toastify({
+        text: "Insufficient fund....",
+        duration: 1000
+      });
+        }else{
+        reqApprove = Toastify({
+        text: "Request Approved....",
+        duration: 1000
+      });
+
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000)
+        }
+          reqApprove.showToast();
+    
+} catch (error) {
+    console.error("Request failed:", error);
+    Toastify({
+      text: "Something went wrong.",
+      duration: 1000,
+    }).showToast();
+  }
+
+        
+       };
+
+     rejectform.onsubmit = async (e) => {
+        e.preventDefault();
+        try{
+       let formData = new FormData(rejectform);
+      const request = await fetch('/dashboard/money-request/reject-request', {
+         method: 'POST',
+          body: formData
+        })
+
+        const response = await request.json();
+            console.log(response)
+
+        let reqApprove;
+        if(response.code == 372){
+         reqApprove = Toastify({
+        text: "Something Wrong",
+        duration: 1000
+      });
+        }else{
+        reqReject = Toastify({
+        text: "Request Rejected....",
+        duration: 1000
+      });
+
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000)
+        }
+          reqReject.showToast();
+    
+} catch (error) {
+    console.error("Request failed:", error);
+    Toastify({
+      text: "Something went wrong.",
+      duration: 1000,
+    }).showToast();
+  }
+
+        
+       };
+       
+    </script>
+  </div>
+</body>
+</html>

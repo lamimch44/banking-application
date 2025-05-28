@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup - MyBank</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Sign Up Agent Account</h2>
+    <form action="/signup" method="post">
+        <input type="text" placeholder="Store Name" name="storename" value="<%=data.storename%>" />
+        <% if(errors.storename) {%>
+        <p class="error"><%= errors.storename.msg %></p>
+        <% } %>
+        <input type="email" placeholder="Email" name="email" value="<%=data.email%>" />
+        <% if(errors.email) {%>
+          <p class="error"><%= errors.email.msg %></p>
+          <% } %>
+        <input type="password" placeholder="Password" name="password" />
+        <% if(errors.password) {%>
+          <p class="error"><%= errors.password.msg %></p>
+          <% } %>
+      
+      <button type="submit">Sign Up</button>
+      <p>Already have an account? <a href="/">Login</a></p>
+    </form>
+  </div>
+</body>
+</html>
